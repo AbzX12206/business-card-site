@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────── База ───────────── */
+@layer base {
+  html {
+    scroll-padding-top: 5rem; /* высота sticky-шапки: якоря не прячутся под ней */
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  html.modal-open {
+    overflow: hidden;
+  }
+  body {
+    @apply overflow-x-clip bg-canvas font-sans text-ink antialiased;
+  }
+  :focus-visible {
+    outline: 3px solid theme("colors.accent.dark");
+    outline-offset: 2px;
+  }
+  ::selection {
+    @apply bg-accent-dark text-white;
+  }
+}
+
+/* ───────────── Компоненты ───────────── */
+@layer components {
+  .icon {
+    @apply h-5 w-5 shrink-0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .skip-link {
+    @apply absolute left-3 -top-16 z-[60] rounded-lg bg-ink px-4 py-3 font-semibold text-white;
+  }
+  .skip-link:focus {
+    @apply top-3;
+  }
+
+  /* Кнопки */
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-center text-[0.9375rem] font-semibold leading-tight transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-70;
+  }
+  .btn-lg {
+    @apply min-h-[3.25rem] px-7 text-base;
+  }
+  .btn-primary {
+    @apply bg-accent-dark text-white hover:bg-[#075985];
+  }
+  .btn-secondary {
+    @apply border border-slate-300 bg-white text-ink hover:border-accent-dark hover:text-accent-dark;
+  }
+  .btn-wa {
+    @apply bg-wa-dark text-white hover:bg-[#09574D];
+  }
+  .icon-btn {
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-white text-ink transition-colors hover:bg-slate-50;
+  }
+
+  /* Навигация */
+  .nav-link {
+    @apply inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-medium text-ink-muted transition-colors hover:bg-white hover:text-ink;
+  }
+  .mobile-link {
+    @apply flex min-h-12 items-center border-b border-line text-lg font-semibold;
+  }
+  .footer-link {
+    @apply inline-flex min-h-11 cursor-pointer items-center rounded-lg px-3 text-ink-muted transition-colors hover:bg-canvas hover:text-ink;
+    font: inherit;
+    font-weight: 500;
+    background: none;
+    border: 0;
+  }
+
+  /* Типографика секций */
+  .eyebrow {
+    @apply text-sm font-bold uppercase tracking-[0.08em] text-accent-dark;
+  }
+  .eyebrow-light {
+    @apply text-sm font-bold uppercase tracking-[0.08em] text-sky-300;
+  }
+  .section-title {
+    @apply mt-3 text-balance text-3xl font-extrabold tracking-tight sm:text-4xl;
+  }
+
+  /* Карточки услуг */
+  .card {
+    @apply rounded-card border border-line bg-white shadow-card;
+  }
+  .price-label {
+    @apply block text-xs font-semibold uppercase tracking-[0.06em] text-ink-muted;
+  }
+  .price {
+    @apply text-[1.75rem] font-extrabold leading-tight tracking-tight;
+  }
+
+  /* FAQ: плавное раскрытие через grid-template-rows (без измерения высоты в JS) */
+  .faq-trigger {
+    @apply flex min-h-14 w-full items-center justify-between gap-4 py-4 text-left text-lg font-semibold;
+  }
+  .faq-chevron {
+    @apply text-accent-dark transition-transform duration-300;
+  }
+  .faq-trigger[aria-expanded="true"] .faq-chevron {
+    transform: rotate(180deg);
+  }
+  .faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden; /* закрытое содержимое не попадает в Tab и скринридер */
+    transition: grid-template-rows 0.3s ease, visibility 0s linear 0.3s;
+  }
+  .faq-panel[data-open="true"] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition: grid-template-rows 0.3s ease, visibility 0s;
+  }
+  .faq-panel-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .faq-panel-inner > p {
+    @apply max-w-prose pb-5 text-ink-muted;
+  }
+
+  /* Контакты */
+  .contact-row {
+    @apply flex gap-4;
+  }
+  .contact-icon {
+    @apply mt-1 text-accent-dark;
+  }
+  .contact-label {
+    @apply text-xs font-semibold uppercase tracking-[0.06em] text-ink-muted;
+  }
+  .contact-link {
+    @apply inline-flex min-h-11 items-center font-semibold underline decoration-slate-300 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent-dark;
+  }
+
+  /* Форма */
+  .label {
+    @apply mb-1.5 block text-sm font-semibold;
+  }
+  .field {
+    @apply block min-h-12 w-full rounded-xl border border-slate-500 bg-white px-4 py-3 text-base text-ink placeholder:text-slate-500;
+  }
+  textarea.field {
+    @apply resize-y;
+  }
+  .field[aria-invalid="true"] {
+    @apply border-red-700 ring-1 ring-red-700;
+  }
+  .field-error {
+    @apply mt-1.5 text-sm font-medium text-red-700;
+  }
+  .hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .link-btn {
+    @apply cursor-pointer font-medium text-accent-dark underline underline-offset-2 hover:text-[#075985];
+    font: inherit;
+    font-weight: 500;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  .form-status {
+    @apply rounded-xl border px-4 py-3 text-[0.9375rem] font-medium;
+  }
+  .form-status[data-state="success"] {
+    @apply border-emerald-300 bg-emerald-50 text-emerald-900;
+  }
+  .form-status[data-state="error"] {
+    @apply border-red-300 bg-red-50 text-red-900;
+  }
+  .form-status a {
+    @apply font-semibold underline underline-offset-2;
+  }
+  .spinner {
+    @apply h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white;
+  }
+
+  /* Модальное окно политики (нативный <dialog>) */
+  .privacy-dialog {
+    @apply overflow-y-auto rounded-card border-0 bg-white p-0 text-ink shadow-2xl;
+    width: min(40rem, calc(100% - 2rem));
+    max-height: calc(100dvh - 2rem);
+  }
+  .privacy-dialog::backdrop {
+    background: rgb(15 23 42 / 0.6);
+  }
+
+  /* Плавающая кнопка WhatsApp */
+  .lang-switch {
+    @apply inline-flex items-center rounded-lg border border-line bg-white p-0.5;
+  }
+  .lang-btn {
+    @apply inline-flex min-h-9 min-w-10 items-center justify-center rounded-md px-2 text-sm font-semibold text-ink-muted transition-colors hover:text-ink;
+  }
+  .lang-btn[aria-pressed="true"] {
+    @apply bg-accent-soft text-accent-dark;
+  }
+
+  .open-badge {
+    @apply inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-semibold;
+  }
+  .open-badge::before {
+    content: "";
+    @apply h-2 w-2 rounded-full;
+  }
+  .open-badge[data-state="open"] {
+    @apply border-emerald-200 bg-emerald-50 text-emerald-900;
+  }
+  .open-badge[data-state="open"]::before {
+    @apply bg-emerald-600;
+  }
+  .open-badge[data-state="closed"] {
+    @apply border-line bg-white text-ink-muted;
+  }
+  .open-badge[data-state="closed"]::before {
+    @apply bg-slate-400;
+  }
+  .open-badge[hidden] {
+    display: none;
+  }
+
+  /* Нижняя панель на телефоне; на планшете и выше скрыта (там есть кнопки в шапке). */
+  .action-bar {
+    @apply fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 gap-2 border-t border-line bg-canvas/95 px-3 pt-2 backdrop-blur sm:hidden;
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  .action-bar .btn {
+    @apply px-2;
+  }
+
+  .consent-banner {
+    @apply fixed inset-x-3 z-50 mx-auto flex max-w-2xl flex-col gap-3 rounded-card border border-line bg-white p-4 text-sm shadow-card sm:flex-row sm:items-center sm:justify-between;
+    bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  }
+  .consent-banner[hidden] {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .consent-banner {
+      bottom: 1rem;
+    }
+  }
+  .consent-banner .btn {
+    @apply min-h-10 px-4 py-2 text-sm;
+  }
+}
+
+/* ───────────── Движение ───────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

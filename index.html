@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ШАБЛОН. Тексты берутся из src/i18n/*.js, данные из src/site.config.js.
+         Токены в двойных фигурных скобках (t, v, block, jsonld) описаны в build/render-template.js.
+         Атрибуты data-i18n / data-i18n-attr / data-block нужны переключателю языка (src/main.js). -->
+    <title>{{t meta.title}}</title>
+    <meta name="description" content="{{t meta.description}}" />
+    <link rel="canonical" href="{{v canonical}}" />
+    <meta name="theme-color" content="#F8FAFC" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{v name}}" />
+    <meta property="og:title" content="{{t meta.ogTitle}}" />
+    <meta property="og:description" content="{{t meta.ogDescription}}" />
+    <meta property="og:url" content="{{v canonical}}" />
+    <meta property="og:image" content="{{v ogImage}}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="{{t meta.ogAlt}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+{{jsonld}}
+    </script>
+  </head>
+
+  <body class="bg-canvas font-sans text-ink antialiased">
+    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+      <symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    </svg>
+
+    <a href="#main" class="skip-link" data-i18n="ui.skip">{{t ui.skip}}</a>
+
+    <!-- ===== HEADER ===== -->
+    <header class="sticky top-0 z-50 border-b border-line bg-canvas/90 backdrop-blur">
+      <div class="mx-auto flex h-16 max-w-page items-center gap-3 px-4 sm:px-6 lg:px-8">
+        <a href="#top" class="flex min-h-11 items-center gap-2.5 font-bold tracking-tight" data-i18n-attr="aria-label:ui.homeAria" aria-label="{{t ui.homeAria}}">
+          <svg class="h-9 w-9 shrink-0" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <rect width="32" height="32" rx="9" fill="#0369A1" />
+            <g transform="translate(4 4)">
+              <path fill="#fff" d="M7.2 3C4.6 3 3 5.1 3 7.6c0 1.9.7 3.2 1.3 4.7.5 1.3.7 2.8 1 4.8.2 1.5.9 3.9 2.2 3.9 1.4 0 1.5-2.7 2.1-4.3.3-.8.7-1.2 1.4-1.2s1.1.4 1.4 1.2c.6 1.6.7 4.3 2.1 4.3 1.3 0 2-2.4 2.2-3.9.3-2 .5-3.5 1-4.8.6-1.5 1.3-2.8 1.3-4.7C21 5.1 19.4 3 16.8 3c-1.9 0-3 .9-4.8.9S9.1 3 7.2 3z" />
+            </g>
+          </svg>
+          <span class="text-[1.0625rem] leading-none">{{v brandMain}} <span class="font-medium text-ink-muted">{{v brandSub}}</span></span>
+        </a>
+
+        <nav class="ml-auto hidden items-center gap-1 lg:flex" aria-label="{{t ui.primaryNav}}" data-i18n-attr="aria-label:ui.primaryNav">
+          <a class="nav-link" href="#services" data-i18n="nav.services">{{t nav.services}}</a>
+          <a class="nav-link" href="#benefits" data-i18n="nav.benefits">{{t nav.benefits}}</a>
+          <a class="nav-link" href="#about" data-i18n="nav.about">{{t nav.about}}</a>
+          <a class="nav-link" href="#faq" data-i18n="nav.faq">{{t nav.faq}}</a>
+          <a class="nav-link" href="#contact" data-i18n="nav.contact">{{t nav.contact}}</a>
+        </nav>
+
+        <div class="lang-switch ml-auto lg:ml-0" role="group" aria-label="{{t ui.language}}" data-i18n-attr="aria-label:ui.language" data-block="langswitch">{{block langswitch}}</div>
+
+        <a href="tel:{{v phoneE164}}" class="hidden min-h-11 items-center gap-2 rounded-lg px-2 font-semibold text-ink hover:text-accent-dark xl:inline-flex">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone" /></svg>
+          {{v phoneDisplay}}
+        </a>
+        <a href="{{v waUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn-wa hidden lg:inline-flex" data-track="whatsapp">
+          <svg class="icon" aria-hidden="true"><use href="#i-chat" /></svg>
+          <span data-i18n="ui.whatsapp">{{t ui.whatsapp}}</span>
+        </a>
+
+        <a href="tel:{{v phoneE164}}" class="icon-btn lg:hidden" data-track="call" data-i18n-attr="aria-label:ui.callAria" aria-label="{{t ui.callAria}}">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone" /></svg>
+        </a>
+        <button type="button" id="menu-toggle" class="icon-btn lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="{{t ui.menuOpen}}">
+          <svg class="icon" data-icon-open aria-hidden="true"><use href="#i-menu" /></svg>
+          <svg class="icon hidden" data-icon-close aria-hidden="true"><use href="#i-x" /></svg>
+        </button>
+      </div>
+
+      <div id="mobile-menu" hidden class="absolute inset-x-0 top-full max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-t border-line bg-canvas shadow-card lg:hidden">
+        <nav class="mx-auto flex max-w-page flex-col px-4 py-3 sm:px-6" aria-label="{{t ui.mobileNav}}" data-i18n-attr="aria-label:ui.mobileNav">
+          <a class="mobile-link" href="#services" data-i18n="nav.services">{{t nav.services}}</a>
+          <a class="mobile-link" href="#benefits" data-i18n="nav.benefits">{{t nav.benefits}}</a>
+          <a class="mobile-link" href="#about" data-i18n="nav.about">{{t nav.about}}</a>
+          <a class="mobile-link" href="#faq" data-i18n="nav.faq">{{t nav.faq}}</a>
+          <a class="mobile-link" href="#contact" data-i18n="nav.contact">{{t nav.contact}}</a>
+          <div class="grid gap-3 py-4 sm:grid-cols-2">
+            <a href="#contact" data-focus="#lead-name" class="btn btn-primary" data-i18n="ui.requestCallback">{{t ui.requestCallback}}</a>
+            <a href="{{v waUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn-wa" data-track="whatsapp">
+              <svg class="icon" aria-hidden="true"><use href="#i-chat" /></svg>
+              <span data-i18n="ui.whatsapp">{{t ui.whatsapp}}</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ===== HERO ===== -->
+      <section id="top" aria-labelledby="hero-title">
+        <div class="mx-auto grid max-w-page items-center gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-8 lg:py-20">
+          <div>
+            <p class="eyebrow" data-i18n="hero.eyebrow">{{t hero.eyebrow}}</p>
+            <h1 id="hero-title" class="mt-4 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]" data-i18n="hero.title">{{t hero.title}}</h1>
+            <p class="mt-5 max-w-xl text-lg text-ink-muted" data-i18n="hero.lead">{{t hero.lead}}</p>
+            <p class="open-badge mt-5" data-open-status hidden></p>
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+              <a href="#contact" data-focus="#lead-name" class="btn btn-primary btn-lg" data-i18n="ui.requestCallback">{{t ui.requestCallback}}</a>
+              <a href="{{v waUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg" data-track="whatsapp">
+                <svg class="icon" aria-hidden="true"><use href="#i-chat" /></svg>
+                <span data-i18n="ui.whatsapp">{{t ui.whatsapp}}</span>
+              </a>
+            </div>
+            <ul class="mt-8 grid gap-3 text-sm font-medium sm:grid-cols-3" role="list">
+              <li class="flex items-start gap-2"><svg class="icon mt-0.5 shrink-0 text-accent-dark" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="hero.trust1">{{t hero.trust1}}</span></li>
+              <li class="flex items-start gap-2"><svg class="icon mt-0.5 shrink-0 text-accent-dark" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="hero.trust2">{{t hero.trust2}}</span></li>
+              <li class="flex items-start gap-2"><svg class="icon mt-0.5 shrink-0 text-accent-dark" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="hero.trust3">{{t hero.trust3}}</span></li>
+            </ul>
+          </div>
+
+          <!-- Картинка-заглушка: замените /assets/hero.svg реальным фото (оставьте width/height). -->
+          <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div class="overflow-hidden rounded-[2rem] bg-accent-soft">
+              <img src="/assets/hero.svg" width="640" height="560" alt="{{t hero.imgAlt}}" data-i18n-attr="alt:hero.imgAlt" fetchpriority="high" class="block h-auto w-full" />
+            </div>
+            <div class="absolute -bottom-5 left-3 max-w-[14rem] rounded-xl border border-line bg-white p-3.5 shadow-card sm:left-6">
+              <p class="text-sm font-bold" data-i18n="hero.chip1Title">{{t hero.chip1Title}}</p>
+              <p class="mt-0.5 text-xs text-ink-muted" data-i18n="hero.chip1Text">{{t hero.chip1Text}}</p>
+            </div>
+            <div class="absolute -top-4 right-3 max-w-[13rem] rounded-xl border border-line bg-white p-3.5 shadow-card sm:right-6">
+              <p class="text-sm font-bold" data-i18n="hero.chip2Title">{{t hero.chip2Title}}</p>
+              <p class="mt-0.5 text-xs text-ink-muted" data-i18n="hero.chip2Text">{{t hero.chip2Text}}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SERVICES (цены: SITE.services, названия: словари) ===== -->
+      <section id="services" class="py-section" aria-labelledby="services-title">
+        <div class="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div class="max-w-2xl">
+            <p class="eyebrow" data-i18n="services.eyebrow">{{t services.eyebrow}}</p>
+            <h2 id="services-title" class="section-title" data-i18n="services.title">{{t services.title}}</h2>
+            <p class="mt-4 text-lg text-ink-muted" data-i18n="services.lead">{{t services.lead}}</p>
+          </div>
+          <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list" data-block="services">
+{{block services}}
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== BENEFITS (демо-цифры: замените реальными) ===== -->
+      <section id="benefits" class="bg-ink py-section text-white" aria-labelledby="benefits-title">
+        <div class="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div class="max-w-2xl">
+            <p class="eyebrow-light" data-i18n="benefits.eyebrow">{{t benefits.eyebrow}}</p>
+            <h2 id="benefits-title" class="section-title" data-i18n="benefits.title">{{t benefits.title}}</h2>
+          </div>
+          <dl class="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4" data-block="benefits">
+{{block benefits}}
+          </dl>
+        </div>
+      </section>
+
+      <!-- ===== ABOUT ===== -->
+      <section id="about" class="py-section" aria-labelledby="about-title">
+        <div class="mx-auto grid max-w-page items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+          <figure class="overflow-hidden rounded-card border border-line bg-white shadow-card lg:order-first">
+            <img src="/assets/about.svg" width="640" height="520" alt="{{t about.imgAlt}}" data-i18n-attr="alt:about.imgAlt" loading="lazy" decoding="async" class="block h-auto w-full" />
+          </figure>
+          <div>
+            <p class="eyebrow" data-i18n="about.eyebrow">{{t about.eyebrow}}</p>
+            <h2 id="about-title" class="section-title" data-i18n="about.title">{{t about.title}}</h2>
+            <div class="mt-5 space-y-4 text-lg text-ink-muted">
+              <p data-i18n="about.p1">{{t about.p1}}</p>
+              <p data-i18n="about.p2">{{t about.p2}}</p>
+            </div>
+            <ul class="mt-6 grid gap-3 font-medium" role="list">
+              <li class="flex items-start gap-3"><svg class="icon mt-0.5 shrink-0 text-accent-dark" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="about.point1">{{t about.point1}}</span></li>
+              <li class="flex items-start gap-3"><svg class="icon mt-0.5 shrink-0 text-accent-dark" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="about.point2">{{t about.point2}}</span></li>
+              <li class="flex items-start gap-3"><svg class="icon mt-0.5 shrink-0 text-accent-dark" aria-hidden="true"><use href="#i-check" /></svg><span data-i18n="about.point3">{{t about.point3}}</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== REVIEWS: секция появляется только если SITE.reviews не пуст ===== -->
+      <div class="contents" data-block="reviews">{{block reviews}}</div>
+
+      <!-- ===== FAQ ===== -->
+      <section id="faq" class="border-y border-line bg-white py-section" aria-labelledby="faq-title">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <p class="eyebrow" data-i18n="faq.eyebrow">{{t faq.eyebrow}}</p>
+          <h2 id="faq-title" class="section-title" data-i18n="faq.title">{{t faq.title}}</h2>
+          <div class="mt-8 divide-y divide-line border-y border-line" data-accordion data-block="faq">
+{{block faq}}
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CONTACT & FORM ===== -->
+      <section id="contact" class="py-section" aria-labelledby="contact-title">
+        <div class="mx-auto grid max-w-page gap-10 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 lg:px-8">
+          <div>
+            <p class="eyebrow" data-i18n="contact.eyebrow">{{t contact.eyebrow}}</p>
+            <h2 id="contact-title" class="section-title" data-i18n="contact.title">{{t contact.title}}</h2>
+            <p class="mt-4 text-lg text-ink-muted" data-i18n="contact.lead">{{t contact.lead}}</p>
+
+            <ul class="mt-8 grid gap-5" role="list">
+              <li class="contact-row">
+                <svg class="icon contact-icon" aria-hidden="true"><use href="#i-phone" /></svg>
+                <div><p class="contact-label" data-i18n="contact.phone">{{t contact.phone}}</p><a class="contact-link" href="tel:{{v phoneE164}}" data-track="call">{{v phoneDisplay}}</a></div>
+              </li>
+              <li class="contact-row">
+                <svg class="icon contact-icon" aria-hidden="true"><use href="#i-chat" /></svg>
+                <div><p class="contact-label" data-i18n="contact.whatsapp">{{t contact.whatsapp}}</p><a class="contact-link" href="{{v waUrl}}" target="_blank" rel="noopener noreferrer" data-track="whatsapp" data-i18n="contact.whatsappLink">{{t contact.whatsappLink}}</a></div>
+              </li>
+              <li class="contact-row">
+                <svg class="icon contact-icon" aria-hidden="true"><use href="#i-send" /></svg>
+                <div>
+                  <p class="contact-label" data-i18n="contact.social">{{t contact.social}}</p>
+                  <p class="flex flex-wrap gap-x-4">
+                    <a class="contact-link" href="{{v telegramUrl}}" target="_blank" rel="noopener noreferrer" data-i18n="contact.telegramLabel">{{t contact.telegramLabel}}</a>
+                    <a class="contact-link" href="{{v instagramUrl}}" target="_blank" rel="noopener noreferrer" data-i18n="contact.instagramLabel">{{t contact.instagramLabel}}</a>
+                  </p>
+                </div>
+              </li>
+              <li class="contact-row">
+                <svg class="icon contact-icon" aria-hidden="true"><use href="#i-pin" /></svg>
+                <div><p class="contact-label" data-i18n="contact.address">{{t contact.address}}</p><address class="not-italic font-semibold">{{v addressLine}}</address></div>
+              </li>
+              <li class="contact-row">
+                <svg class="icon contact-icon" aria-hidden="true"><use href="#i-clock" /></svg>
+                <div>
+                  <p class="contact-label" data-i18n="contact.hours">{{t contact.hours}}</p>
+                  <p class="open-badge mb-2" data-open-status hidden></p>
+                  <dl class="grid grid-cols-[auto_1fr] gap-x-5 gap-y-0.5 font-semibold" data-block="hours">{{block hours}}</dl>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Карта: ссылка всегда (Google Maps или 2GIS, см. SITE.mapLinkUrl); iframe только если задан SITE.mapEmbedUrl. -->
+            <div id="map" class="mt-8 overflow-hidden rounded-card border border-line bg-accent-soft">
+              {{block map}}
+              <div class="flex flex-col items-center justify-center gap-3 p-6 text-center">
+                <svg class="icon h-8 w-8 text-accent-dark" aria-hidden="true"><use href="#i-pin" /></svg>
+                <p class="font-semibold">{{v addressLine}}</p>
+                <a class="btn btn-secondary bg-white" href="{{v mapLink}}" target="_blank" rel="noopener noreferrer" data-track="map">
+                  <span data-i18n="contact.mapOpen">{{t contact.mapOpen}}</span>
+                  <svg class="icon" aria-hidden="true"><use href="#i-external" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <form id="lead-form" class="card self-start p-6 sm:p-8" novalidate aria-labelledby="form-title" data-country="{{v country}}">
+            <h3 id="form-title" class="text-2xl font-bold tracking-tight" data-i18n="form.title">{{t form.title}}</h3>
+            <p class="mt-1.5 text-ink-muted" data-i18n="form.lead">{{t form.lead}}</p>
+
+            <div class="mt-6 grid gap-5">
+              <div>
+                <label class="label" for="lead-name"><span data-i18n="form.name">{{t form.name}}</span> <span class="text-red-700" aria-hidden="true">*</span></label>
+                <input class="field" id="lead-name" name="name" type="text" autocomplete="name" required aria-required="true" aria-describedby="lead-name-error" maxlength="80" placeholder="{{t form.namePlaceholder}}" data-i18n-attr="placeholder:form.namePlaceholder" />
+                <p class="field-error" id="lead-name-error" hidden></p>
+              </div>
+              <div>
+                <label class="label" for="lead-phone"><span data-i18n="form.phone">{{t form.phone}}</span> <span class="text-red-700" aria-hidden="true">*</span></label>
+                <input class="field" id="lead-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-required="true" aria-describedby="lead-phone-error" maxlength="20" placeholder="{{v phonePlaceholder}}" />
+                <p class="field-error" id="lead-phone-error" hidden></p>
+              </div>
+              <div>
+                <label class="label" for="lead-service"><span data-i18n="form.service">{{t form.service}}</span> <span class="font-normal text-ink-muted" data-i18n="form.optional">{{t form.optional}}</span></label>
+                <select class="field" id="lead-service" name="service" data-block="serviceOptions">{{block serviceOptions}}</select>
+              </div>
+              <div>
+                <label class="label" for="lead-notes"><span data-i18n="form.notes">{{t form.notes}}</span> <span class="font-normal text-ink-muted" data-i18n="form.optional">{{t form.optional}}</span></label>
+                <textarea class="field" id="lead-notes" name="notes" rows="3" maxlength="800" placeholder="{{t form.notesPlaceholder}}" data-i18n-attr="placeholder:form.notesPlaceholder"></textarea>
+              </div>
+
+              <!-- Honeypot: людям не виден, боты часто заполняют. -->
+              <div class="hp" aria-hidden="true">
+                <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+              </div>
+
+              <p class="text-sm text-ink-muted">
+                <span data-i18n="form.consentPre">{{t form.consentPre}}</span>
+                <button type="button" class="link-btn" data-open-privacy data-i18n="footer.privacy">{{t footer.privacy}}</button>.
+              </p>
+
+              <div id="form-status" class="form-status" role="status" aria-live="polite" tabindex="-1" hidden></div>
+
+              <button type="submit" class="btn btn-primary btn-lg" id="lead-submit">
+                <span class="spinner" data-spinner hidden aria-hidden="true"></span>
+                <span data-submit-label data-i18n="form.submit">{{t form.submit}}</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-line bg-white pb-24 pt-10 sm:pb-10">
+      <div class="mx-auto flex max-w-page flex-col gap-6 px-4 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+        <div>
+          <p class="font-bold">{{v name}}</p>
+          <p class="mt-1 text-sm text-ink-muted">{{v addressLine}}</p>
+          <p class="mt-3 text-sm text-ink-muted">&copy; {{v year}} {{v name}}. <span data-i18n="footer.rights">{{t footer.rights}}</span></p>
+        </div>
+        <nav aria-label="{{t ui.footerNav}}" data-i18n-attr="aria-label:ui.footerNav" class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium">
+          <a class="footer-link" href="tel:{{v phoneE164}}" data-track="call">{{v phoneDisplay}}</a>
+          <a class="footer-link" href="{{v waUrl}}" target="_blank" rel="noopener noreferrer" data-track="whatsapp">WhatsApp</a>
+          <a class="footer-link" href="{{v telegramUrl}}" target="_blank" rel="noopener noreferrer">Telegram</a>
+          <a class="footer-link" href="{{v instagramUrl}}" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <button type="button" class="footer-link" data-open-privacy data-i18n="footer.privacy">{{t footer.privacy}}</button>
+          <button type="button" class="footer-link" data-open-consent hidden data-i18n="footer.cookies">{{t footer.cookies}}</button>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Политика конфиденциальности (нативный <dialog>). Текст-заготовка: покажите юристу перед запуском. -->
+    <dialog id="privacy-dialog" class="privacy-dialog" aria-labelledby="privacy-title">
+      <div class="flex items-start justify-between gap-4 border-b border-line p-5 sm:p-6">
+        <h2 id="privacy-title" class="text-xl font-bold tracking-tight" data-i18n="privacy.title">{{t privacy.title}}</h2>
+        <button type="button" class="icon-btn -mr-2 -mt-1 shrink-0" data-close-privacy aria-label="{{t privacy.closeAria}}" data-i18n-attr="aria-label:privacy.closeAria">
+          <svg class="icon" aria-hidden="true"><use href="#i-x" /></svg>
+        </button>
+      </div>
+      <div class="space-y-4 p-5 text-[0.9375rem] leading-relaxed text-ink-muted sm:p-6" data-block="privacy">
+{{block privacy}}
+      </div>
+      <div class="border-t border-line p-5 sm:px-6">
+        <button type="button" class="btn btn-primary w-full sm:w-auto" data-close-privacy data-i18n="privacy.close">{{t privacy.close}}</button>
+      </div>
+    </dialog>
+
+    <!-- ===== Баннер согласия на аналитику (показывается, только если в SITE.analytics есть ID) ===== -->
+    <div id="consent" class="consent-banner" role="region" aria-label="{{t consent.aria}}" data-i18n-attr="aria-label:consent.aria" hidden>
+      <p data-i18n="consent.text">{{t consent.text}}</p>
+      <div class="flex gap-2">
+        <button type="button" class="btn btn-secondary" data-consent="denied" data-i18n="consent.decline">{{t consent.decline}}</button>
+        <button type="button" class="btn btn-primary" data-consent="granted" data-i18n="consent.accept">{{t consent.accept}}</button>
+      </div>
+    </div>
+
+    <!-- ===== Нижняя панель быстрых действий (только на телефоне) ===== -->
+    <nav class="action-bar" aria-label="{{t ui.quickContact}}" data-i18n-attr="aria-label:ui.quickContact">
+      <a href="tel:{{v phoneE164}}" class="btn btn-secondary" data-track="call">
+        <svg class="icon" aria-hidden="true"><use href="#i-phone" /></svg><span data-i18n="ui.call">{{t ui.call}}</span>
+      </a>
+      <a href="{{v waUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn-wa" data-track="whatsapp">
+        <svg class="icon" aria-hidden="true"><use href="#i-chat" /></svg><span data-i18n="ui.whatsapp">{{t ui.whatsapp}}</span>
+      </a>
+      <a href="#contact" data-focus="#lead-name" class="btn btn-primary" data-i18n="ui.request">{{t ui.request}}</a>
+    </nav>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

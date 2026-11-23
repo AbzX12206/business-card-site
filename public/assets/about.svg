@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" fill="none">
+  <!-- Placeholder illustration of a calm treatment room. Replace with a real photo (keep the 640x520 ratio). -->
+  <rect width="640" height="520" fill="#E0F2FE"/>
+  <rect y="400" width="640" height="120" fill="#BAE6FD"/>
+  <rect y="396" width="640" height="8" fill="#7DD3FC"/>
+
+  <!-- Arched window -->
+  <path d="M80 330V190a90 90 0 0 1 180 0v140z" fill="#F0F9FF" stroke="#0369A1" stroke-width="6"/>
+  <path d="M170 100v230M80 220h180" stroke="#0369A1" stroke-width="4"/>
+  <circle cx="215" cy="150" r="14" fill="#fff"/>
+
+  <!-- Pendant lamp -->
+  <path d="M440 0v96" stroke="#0F172A" stroke-width="3"/>
+  <path d="M400 150a40 40 0 0 1 80 0z" fill="#0369A1"/>
+  <path d="M424 150h32v10a16 16 0 0 1-32 0z" fill="#FDE68A"/>
+
+  <!-- Chair -->
+  <rect x="300" y="238" width="64" height="168" rx="30" transform="rotate(-10 332 322)" fill="#fff" stroke="#0369A1" stroke-width="6"/>
+  <rect x="318" y="346" width="190" height="48" rx="24" fill="#fff" stroke="#0369A1" stroke-width="6"/>
+  <rect x="402" y="392" width="30" height="20" fill="#0369A1"/>
+  <ellipse cx="417" cy="414" rx="64" ry="9" fill="#0369A1"/>
+
+  <!-- Plant -->
+  <path d="M540 350h64l-8 56h-48z" fill="#0369A1"/>
+  <ellipse cx="560" cy="316" rx="13" ry="36" transform="rotate(-24 560 316)" fill="#0284C7"/>
+  <ellipse cx="588" cy="310" rx="13" ry="40" transform="rotate(20 588 310)" fill="#38BDF8"/>
+  <ellipse cx="574" cy="296" rx="12" ry="42" fill="#0284C7"/>
+</svg>
